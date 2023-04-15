@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Collection;
 public class MyArrayList<T> {
     // _hiddenArr is the internal array to store all elements
     private T[] _hiddenArr;
