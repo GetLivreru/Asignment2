@@ -1,20 +1,35 @@
-import java.util.*;
-public class MyArrayList<E> implements List<E>{
-  private Object[] elements;
-  private int size;
-  
-public MyArraylist(){
-  // This is an implementation of a custom ArrayList called MyArrayList that implements the List interface.
-  elements = new Object[10];
-  size = 0;
-}
- private void resize() {
-        int newSize = elements.length * 2;
-        elements = Arrays.copyOf(elements, newSize);
+import java.util.Arrays;
+public class MyArrayList<T> {
+    // _hiddenArr is the internal array to store all elements
+    private T[] _hiddenArr;
+    // _length is the actual number of elements in the internal array
+    private int _length;
+
+    // Default constructor that creates array with size 5
+    public MyArrayList() {
+        this(5);
     }
 
- // Testing the implementation
-    public static void main(String[] args) {
-        
- }
+    // Overloaded constructor that allows to put specific size for array
+    public MyArrayList(int initCapacity) {
+        _hiddenArr = (T[])new Object[initCapacity];
+    }
+
+    // Private method that doubles the size of internal array when it becomes full
+    private void increaseArray() {
+        // Doubling the size
+        int newSize = _hiddenArr.length * 2;
+        _hiddenArr = Arrays.copyOf(_hiddenArr, newSize);
+    }
+  // Add a single item into Array List
+    public void add(T item) {
+        // Checks if Array List is full
+        if (_length == _hiddenArr.length) {
+            // Doubling its size if its full
+            increaseArray();
+        }
+
+        // Add the item to the internal array
+        _hiddenArr[_length++] = item;
+    }
 }
