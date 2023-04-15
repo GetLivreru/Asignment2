@@ -34,3 +34,77 @@ public class MyArrayList<T> {
         _hiddenArr[_length++] = item;
     }
 }
+// Add items from a collection into Array List
+    public void addAll(Collection<? extends T> collection) {
+        // Iterate over the items in collection using foreach loop
+        for (T item : collection) {
+            // Call the add method for each item from collection
+            add(item);
+        }
+    }
+
+    // Add item in specific location (index)
+    public void add(T item, int index) {
+        // Check if index is out of range
+        if (index < 0 || index > _length)
+            // Throw an exception
+            throw new IndexOutOfBoundsException();
+
+        // Check if internal array is full
+        if (_length == _hiddenArr.length)
+            // Doubling its size if its full
+            increaseArray();
+
+        // Shift all elements to the right from index
+        for (int i = _length; i > index; i--) {
+            _hiddenArr[i] = _hiddenArr[i - 1];
+        }
+
+        // Put item inside internal array
+        _hiddenArr[index] = item;
+
+        // Incrementing length of Array List
+        _length++;
+    }
+
+    // Replace item in specific location (index)
+    public void replace(T item, int index) {
+        // Check if the index is out of range
+        if (index >= _length)
+            // Throw an exception
+            throw new IndexOutOfBoundsException();
+
+        // Replace the item in internal array
+        _hiddenArr[index] = item;
+    }
+
+    // Get item at specific location (index)
+    public T get(int index) {
+        // Check if the index is out of range
+        if (index >= _length)
+            throw new IndexOutOfBoundsException();
+
+        // Return item at specific location
+        return _hiddenArr[index];
+    }
+
+    // Get size of Array List
+    public int size() {
+        // Return length of Array List
+        return _length;
+    }
+
+    // Index of specific item if found in Array List
+    public int indexOf(T item) {
+        // Iterate over the items in Array List
+        for (int i = 0; i < _length; i++) {
+            // Check if each item is equal to given item
+            if (_hiddenArr[i].equals(item))
+                // Return the index of given item
+                return i;
+        }
+
+        // Return -1 if given item was not found
+        return -1;
+    }
+}
